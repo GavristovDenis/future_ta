@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { SearchBar } from "./components/SearchBar";
 import { BookCard } from "./components/BookCard";
+import { CardModal } from "./components/CardModal";
+import { type } from "os";
 // interface Book {
 //   items: [
 //     {
@@ -23,6 +25,8 @@ import { BookCard } from "./components/BookCard";
 const App = () => {
   const [booksArray, setBooksArray] = useState<any>([]);
   const [search, setSearch] = useState("");
+  const [modalOn, setModalOn] = useState(false);
+  const [selectedBook, setSelectedBook] = useState({});
   useEffect(() => {
     axios
       .get(
@@ -40,12 +44,16 @@ const App = () => {
         )
 
         .then((j) => setBooksArray(j.data.items));
-      // .then(setSearch(""));
     }
   };
   console.log(booksArray);
   return (
     <div className="App">
+      <CardModal
+        modalOn={modalOn}
+        setModalOn={() => setModalOn(false)}
+        // title={selectedBook.title}
+      />
       <SearchBar setSearch={setSearch} SearchBook={SearchBook} />
       <div className="books_container">
         {booksArray.map((book: any, index: any) => {
@@ -56,6 +64,15 @@ const App = () => {
               category={book.volumeInfo.categories}
               title={book.volumeInfo.title}
               author={book.volumeInfo.authors}
+              setModalOn={() => setModalOn(true)}
+              onClick={() =>
+                setSelectedBook({
+                  thumbnail: book.volumeInfo.imageLinks.thumbnail,
+                  category: book.volumeInfo.categories,
+                  title: book.volumeInfo.title,
+                  author: book.volumeInfo.authors,
+                })
+              }
             />
           );
         })}

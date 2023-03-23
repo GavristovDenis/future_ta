@@ -1,6 +1,12 @@
-export const BookCard = ({ smallThumbnail, category, title, author }: any) => {
+export const BookCard = ({
+  smallThumbnail,
+  category,
+  title,
+  author,
+  setModalOn,
+}: any) => {
   return (
-    <div className="book_card">
+    <div className="book_card" onClick={setModalOn}>
       <img
         alt="Изображение не загрузилось"
         src={smallThumbnail}
