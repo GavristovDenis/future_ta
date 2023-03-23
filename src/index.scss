@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("https://mobimg.b-cdn.net/v3/fetch/a8/a89633eb73b5bdfb87cf97b9e5cb9839.jpeg?w=1470&r=0.5625");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  width: 100%;
+  z-index: 1;
+  height: 1500px;
+  box-shadow: inset 0 0 0 200vw rgba(0, 0, 0, 0.6);
+}
+.book_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px auto;
+  height: 350px;
+  width: 250px;
+  background-color: rgb(239, 234, 227);
+  justify-content: center;
+  box-shadow: 0px 0px 1px rgb(255, 255, 255);
+  z-index: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.books_container {
+  height: 900px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: aliceblue;
+  margin-top: 150px;
+  margin-bottom: 150px;
+  z-index: 2;
+  box-shadow: 0px 0px 4px #000000;
+}
+
+.card_image {
+  position: relative;
+  width: 150px;
+  height: 200px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.book_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  font-size: 12px;
+  width: 225px;
+  .book_category {
+    color: rgb(169, 169, 169);
+  }
+  .book_title {
+    border-bottom: 2px solid maroon;
+  }
+}
+
+.search_bar {
+  margin-top: 100px;
+}
+
+.search_bar_input {
+  height: 40px;
+  width: 500px;
+}
+.MuiInputBase-root {
+  background-color: white;
+}
+
+@media (max-width: 800px) {
+  .book_card {
+    height: 300px;
+    width: 200px;
+  }
+  .book_info {
+    width: 90%;
+  }
+  .books_container {
+    height: 100%;
+  }
+}

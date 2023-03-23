@@ -1,26 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { SearchBar } from "./components/SearchBar";
+import { BookCard } from "./components/BookCard";
+// interface Book {
+//   items: [
+//     {
+//       vollumeInfo: {
+//         id: string;
+//         title: string;
+//         author: string;
+//         description: string;
+//         categories: [string];
+//         imageLinks: {
+//           smallThumbnail: URL;
+//           Thumbnail: URL;
+//         };
+//       };
+//     }
+//   ];
+// }
 
-function App() {
+const App = () => {
+  const [booksArray, setBooksArray] = useState<any>([]);
+  const [search, setSearch] = useState("");
+  useEffect(() => {
+    axios
+      .get(
+        "https://www.googleapis.com/books/v1/volumes?q=cat&key=AIzaSyCCgu28PsNJ0DzytDl-ftxaV3g0TjPyXEs"
+      )
+      .then((j) => setBooksArray(j.data.items));
+  }, []);
+  const SearchBook = (evt: any) => {
+    if (evt.key === "Enter") {
+      axios
+        .get(
+          "https://www.googleapis.com/books/v1/volumes?q=" +
+            search +
+            "&key=AIzaSyCCgu28PsNJ0DzytDl-ftxaV3g0TjPyXEs"
+        )
+
+        .then((j) => setBooksArray(j.data.items));
+      // .then(setSearch(""));
+    }
+  };
+  console.log(booksArray);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar setSearch={setSearch} SearchBook={SearchBook} />
+      <div className="books_container">
+        {booksArray.map((book: any, index: any) => {
+          return (
+            <BookCard
+              key={index}
+              smallThumbnail={book.volumeInfo.imageLinks.smallThumbnail}
+              category={book.volumeInfo.categories}
+              title={book.volumeInfo.title}
+              author={book.volumeInfo.authors}
+            />
+          );
+        })}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
