@@ -49,11 +49,6 @@ const App = () => {
   console.log(booksArray);
   return (
     <div className="App">
-      <CardModal
-        modalOn={modalOn}
-        setModalOn={() => setModalOn(false)}
-        // title={selectedBook.title}
-      />
       <SearchBar setSearch={setSearch} SearchBook={SearchBook} />
       <div className="books_container">
         {booksArray.map((book: any, index: any) => {
